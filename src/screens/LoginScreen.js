@@ -22,7 +22,7 @@ var base64 = require('base-64');
 
 export default class LoginScreen extends React.Component {
 
-    _form = {email: 'd3fupc26mxdp@inbox.ru', pwd:'1q2w3e4r'};
+    _form = {email: '', email_err: '', pwd:'', pwd_err: ''};
 
     constructor(props) {
         super(props);
@@ -35,6 +35,8 @@ export default class LoginScreen extends React.Component {
     }
 
     _logIn() {
+        if (!this._validateInputs())
+            return;
         const token = base64.encode(this._form.email + ':' + this._form.pwd);
         const {store} = this.context;
         store.dispatch({type: 'LOGGING'});
@@ -63,6 +65,25 @@ export default class LoginScreen extends React.Component {
             });
     }
 
+    _validateInputs() {
+        this._form.email_err = '';
+        this._form.pwd_err = '';
+
+        if (!this._form.email || this._form.email.length < 1) {
+            this._form.email_err = 'email is required'
+        }
+        if (!this._form.pwd || this._form.pwd.length < 1) {
+            this._form.pwd_err = 'password is required'
+        }
+
+        if (this._form.email_err || this._form.pwd_err) {
+            this.forceUpdate();
+            return false;
+        }
+
+        return true;
+    }
+
     componentDidMount() {
         const {store} = this.context;
         this.unsubscribe = store.subscribe(() => this.forceUpdate());
@@ -85,7 +106,9 @@ export default class LoginScreen extends React.Component {
                     dividerStyle={styles.divider} >
 
                     <TextInput placeholder={strings('login.email_placeholder')} onChangeText={(val) => this._form.email = val} />
+                    {this._form.email_err ? <Text style={styles.inputError}>{this._form.email_err}</Text>:<Text />}
                     <TextInput secureTextEntry placeholder={strings('login.pwd_placeholder')} onChangeText={(val) => this._form.pwd = val} />
+                    {this._form.pwd_err ? <Text style={styles.inputError}>{this._form.pwd_err}</Text>:<Text />}
                     {state.auth.isLogging ? (
                         <ActivityIndicator size="large" />
                     ) : (

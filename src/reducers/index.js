@@ -2,7 +2,6 @@ import { combineReducers } from 'redux';
 import { NavigationActions } from 'react-navigation';
 import { LOAD, SAVE } from 'redux-storage';
 import images from '@assets/images';
-//import images from '../assets/images';
 
 export const auth = (state = {}, action) => {
     switch (action.type) {
