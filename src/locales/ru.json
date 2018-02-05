@@ -2,7 +2,9 @@
   "login": {
     "title": "Вход в GitHub",
     "email_placeholder": "Email адрес...",
+    "email_error_required": "email адрес обязателен для заполнения",
     "pwd_placeholder": "Пароль...",
+    "pwd_error_required": "пароль обязателен для заполнения",
     "login_button": "Вход"
   },
   "main": {

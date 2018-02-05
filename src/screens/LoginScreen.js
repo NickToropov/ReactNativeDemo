@@ -70,10 +70,10 @@ export default class LoginScreen extends React.Component {
         this._form.pwd_err = '';
 
         if (!this._form.email || this._form.email.length < 1) {
-            this._form.email_err = 'email is required'
+            this._form.email_err = strings('login.email_error_required')
         }
         if (!this._form.pwd || this._form.pwd.length < 1) {
-            this._form.pwd_err = 'password is required'
+            this._form.pwd_err = strings('login.pwd_error_required')
         }
 
         if (this._form.email_err || this._form.pwd_err) {
@@ -105,10 +105,10 @@ export default class LoginScreen extends React.Component {
                     titleStyle={styles.cardTitle}
                     dividerStyle={styles.divider} >
 
-                    <TextInput placeholder={strings('login.email_placeholder')} onChangeText={(val) => this._form.email = val} />
-                    {this._form.email_err ? <Text style={styles.inputError}>{this._form.email_err}</Text>:<Text />}
+                    <TextInput placeholder={strings('login.email_placeholder')} keyboardType="email-address" onChangeText={(val) => this._form.email = val} />
+                    {this._form.email_err ? <Text style={styles.inputErrorMsg}>{this._form.email_err}</Text>:<Text />}
                     <TextInput secureTextEntry placeholder={strings('login.pwd_placeholder')} onChangeText={(val) => this._form.pwd = val} />
-                    {this._form.pwd_err ? <Text style={styles.inputError}>{this._form.pwd_err}</Text>:<Text />}
+                    {this._form.pwd_err ? <Text style={styles.inputErrorMsg}>{this._form.pwd_err}</Text>:<Text />}
                     {state.auth.isLogging ? (
                         <ActivityIndicator size="large" />
                     ) : (

@@ -2,7 +2,9 @@
   "login": {
     "title": "Login to GitHub",
     "email_placeholder": "Email address...",
+    "email_error_required": "email is required",
     "pwd_placeholder": "Password...",
+    "pwd_error_required": "password is required",
     "login_button": "Login"
   },
   "main": {

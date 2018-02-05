@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     divider: {
         backgroundColor:'#b2b2b2',
     },
-    inputError: {
+    inputErrorMsg: {
         color: 'red',
         fontStyle: 'italic',
         fontSize: 12
