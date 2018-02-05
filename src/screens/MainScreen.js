@@ -17,6 +17,17 @@ import styles from '../styles/styles';
 
 export default class MainScreen extends React.Component {
 
+    constructor(props) {
+        super(props);
+
+        this.goToLoginScreenAction = NavigationActions.reset({
+                index: 0,
+                actions: [
+                    NavigationActions.navigate({ routeName: 'LoginScreen'})
+                ]
+            });
+    }
+
     _loadData() {
         const {store} = this.context;
         const state = store.getState();
@@ -48,7 +59,7 @@ export default class MainScreen extends React.Component {
         const {store} = this.context;
         const state = store.getState();
         if (!state.auth.token) {
-            this.props.navigation.navigate('LoginScreen')
+            this.props.navigation.dispatch(this.goToLoginScreenAction)
         } else {
             this._loadData();
         }
@@ -57,12 +68,9 @@ export default class MainScreen extends React.Component {
     render() {
         const {store} = this.context;
         const state = store.getState();
-        const resetAction = NavigationActions.reset({
-                        index: 0,
-                        actions: [
-                            NavigationActions.navigate({ routeName: 'LoginScreen'})
-                        ]
-                    });
+        if (!state.auth.token) {
+            return <View />;
+        }
         return (
             <View style={{flex: 1, alignItems: 'center', alignItems: 'stretch'}}>
                 <Card containerStyle={styles.cardContainer} wrapperStyle={{flexDirection: 'row'}}>
@@ -72,7 +80,7 @@ export default class MainScreen extends React.Component {
                     <Button title={strings('main.logout_button')}
                         onPress={() => {
                             store.dispatch({type: 'LOGOUT'});
-                            this.props.navigation.dispatch(resetAction)
+                            this.props.navigation.dispatch(this.goToLoginScreenAction);
                         }} />
                         </View>
                 </Card>

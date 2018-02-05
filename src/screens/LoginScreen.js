@@ -26,7 +26,8 @@ export default class LoginScreen extends React.Component {
 
     constructor(props) {
         super(props);
-        this.resetAction = NavigationActions.reset({
+
+        this.goToMainScreenAction = NavigationActions.reset({
                 index: 0,
                 actions: [
                     NavigationActions.navigate({ routeName: 'MainScreen'})
@@ -57,7 +58,7 @@ export default class LoginScreen extends React.Component {
             })
             .then((user) => {
                 store.dispatch({type: 'LOGIN', token, id: user.id, name: user.name, avatar_url: user.avatar_url});
-                this.props.navigation.dispatch(this.resetAction)
+                this.props.navigation.dispatch(this.goToMainScreenAction)
             })
             .catch((err) => {
                 store.dispatch({type: 'LOGIN', token:'', id: '', name: '', avatar_url: ''});
@@ -101,7 +102,7 @@ export default class LoginScreen extends React.Component {
 
             <View style={{flex:1, justifyContent: 'center',}}>
                 <Card title={strings('login.title')}
-                    containerStyle={{borderRadius: 5}}
+                    containerStyle={[styles.cardContainer, {margin: 20}]}
                     titleStyle={styles.cardTitle}
                     dividerStyle={styles.divider} >
 
