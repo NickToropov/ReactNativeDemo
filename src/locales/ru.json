@@ -1,0 +1,12 @@
+{
+  "login": {
+    "title": "Вход в GitHub",
+    "email_placeholder": "Email адрес...",
+    "pwd_placeholder": "Пароль...",
+    "login_button": "Вход"
+  },
+  "main": {
+    "logout_button": "Выход",
+    "repositories_list_title": "Список репозиториев"
+  }
+}
